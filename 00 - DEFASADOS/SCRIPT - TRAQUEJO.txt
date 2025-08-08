@@ -1,0 +1,100 @@
+                             
+UNIVERSIDADE FEDERAL DA BAHIA - CAMPUS SALVADOR
+DOCENTE: RANANSAMIR SOUSA DA SILVA
+DISCENTE: BRUNA SANTIAGO ARAUJO, GABRIEL SOUZA, LUIZ HENRIQUE E TAMIRES SANTOS
+TURMA: 010100  - MATB21
+
+
+*********************************************************************************************************
+                                SCRIPS - PROJETO DO SISTEMA TRAQUEJO
+*********************************************************************************************************
+
+*********************************************************************************************************
+                                                TABLES
+*********************************************************************************************************
+
+CREATE TABLE MODERADOR (
+    ID_MODERADOR                                 VARCHAR (16)  NOT NULL,
+    NOME_MODERADOR                               VARCHAR (60)  NOT NULL, 
+    DISCIPLINA_MODERADOR                         VARCHAR (400),
+       );
+
+CREATE TABLE GRUPO (
+    ID_GRUPO                                     VARCHAR (16)  NOT NULL,
+    NUMERO_GRUPO                                 VARCHAR (8)  NOT NULL,
+);
+
+CREATE TABLE USUARIO (
+    ID_USUARIO                                   VARCHAR (16)  NOT NULL,
+    NOME_USUARIO                                 VARCHAR (60)  NOT NULL, 
+    TURMA_USUARIO                                VARCHAR (20), 
+    SERIE_USUARIO                                VARCHAR (20),
+  );
+
+CREATE  TABLE  TEMA (
+    ID_TEMA                                      VARCHAR (16)  NOT NULL,
+    NOME_ TEMA                                   VARCHAR (60), NOT NULL, 
+    DESCRICAO_TEMA                               VARCHAR (400),
+    );
+
+CREATE TABLE DISCIPLINA (
+    ID_DISCIPLINA                                 VARCHAR (16)  NOT NULL,
+    NOME_DISCIPLINA                               VARCHAR (60)  NOT NULL, 
+    DESCRICAO_DISCIPLINA                          VARCHAR (400),
+   );
+
+CREATE TABLE EXERCICIO (
+   ID_EXERCICIO                                   VARCHAR (16)  NOT NULL,
+   TITULO_EXERCICIO                               VARCHAR (60)  NOT NULL, 
+   DESCRICAO_EXERCICIO                            VARCHAR (400),
+  );
+
+CREATE TABLE IMAGEM (
+    ID_IMAGEM                                     VARCHAR (16)  NOT NULL,
+    NOME_IMAGEM                                   VARCHAR (100),
+    NOME_ARQUIVO                                  VARCHAR (60),
+);
+
+CREATE TABLE DICAS (
+   ID_DICAS                                       VARCHAR (16)  NOT NULL,
+   NUMERO_DICAS                                   VARCHAR (8)   NOT NULL, 
+   DESCRICAO_DICAS                                VARCHAR (400),
+);
+
+CREATE TABLE FORMA_GEOMETRICA (
+    ID_FORMAS_GEOMETRICAS                         VARCHAR (16)  NOT NULL,
+    NOME_FORMAS_GEOMETRICAS                       VARCHAR (60), NOT NULL, 
+    DESCRICAO_FORMA_GEOMETRICA                    VARCHAR (400),
+      );
+
+
+
+
+*********************************************************************************************************
+                                                 PRIMARY KEYS
+*********************************************************************************************************
+
+ALTER TABLE MODERADOR ADD CONSTRAINT PK_ID_MODERADOR PRIMARY KEY (ID_MODERADOR);
+ALTER TABLE GRUPO ADD CONSTRAINT PK_GRUPO PRIMARY KEY (ID_GRUPO);
+ALTER TABLE USUARIO ADD CONSTRAINT PK_USUARIO PRIMARY KEY (ID_USUARIO);
+ALTER TABLE TEMA ADD CONSTRAINT PK_TEMA PRIMARY KEY (ID_TEMA);
+ALTER TABLE DISCIPLINA ADD CONSTRAINT PK_DISCIPLINA PRIMARY KEY (ID_DISCIPLINA);
+ALTER TABLE EXERCICIO ADD CONSTRAINT PK_EXERCICIO PRIMARY KEY (ID_EXERCICIO);
+ALTER TABLE IMAGEM ADD CONSTRAINT PK_IMAGEM PRIMARY KEY (ID_IMAGEM);
+ALTER TABLE DICAS ADD CONSTRAINT PK_DICAS PRIMARY KEY (ID_DICAS);
+ALTER TABLE FORMA_GEOMETRICA ADD CONSTRAINT PK_FORMA_GEOMETRICA PRIMARY KEY (ID_FORMA_GEOMETRICA);
+
+*********************************************************************************************************
+                                                 FOREIGN KEYS
+*********************************************************************************************************
+
+ALTER TABLE GRUPO ADD CONSTRAINT FK_GRUPO_1 FOREIGN KEY (ID_MODERADOR) REFERENCES USUARIO (ID_MODERADOR);
+ALTER TABLE USUARIO ADD CONSTRAINT FK_USUARIO_1 FOREIGN KEY (ID_GRUPO) REFERENCES USUARIO (ID_GRUPO);
+ALTER TABLE TEMA ADD CONSTRAINT FK_TEMA_1 FOREIGN KEY (ID_GRUPO) REFERENCES USUARIO (ID_GRUPO);
+ALTER TABLE DISCIPLINA ADD CONSTRAINT FK_DISCIPLINA_1 FOREIGN KEY (ID_TEMA) REFERENCES COPIA (ID_TEMA);
+ALTER TABLE EXERCICIO ADD CONSTRAINT FK_EXERCICIO_1 FOREIGN KEY (ID_DISCIPLINA) REFERENCES FILME (ID_DISCIPLINA);
+ALTER TABLE IMAGEM ADD CONSTRAINT FK_IMAGEM_1 FOREIGN KEY (ID_EXERCICIO) REFERENCES FILME (ID_EXERCICIO);
+ALTER TABLE DICAS ADD CONSTRAINT FK_DICAS_1 FOREIGN KEY (ID_EXERCICIO) REFERENCES FILME (ID_EXERCICIO);
+ALTER TABLE FORMA_GEOMETRICA ADD CONSTRAINT FK_FORMA_GEOMETRICA_1 FOREIGN KEY (ID_EXERCICIO) REFERENCES FILME (ID_EXERCICIO);
+
+
